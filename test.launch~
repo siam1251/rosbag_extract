@@ -1,0 +1,11 @@
+<!-- this is a launch file -->
+<launch>
+	<node pkg="rosbag" type="play" name="rosbagplay" args="$(find plot)/data/3.bag --clock -d 5  -u 60" required="true"/>
+	<node name="utm_odometry_node" pkg="gps_common" type="utm_odometry_node">
+	    <!-- <remap from="/fix" to="/navsat/fix" /> -->
+	    <remap from="/odom" to="/odom1" />
+    </node>
+    <node name="animation"  pkg="plot" type="simple_anim.py" args="" />
+    <include file="$(find plot)./navsat_transform.launch"/>
+
+</launch>
