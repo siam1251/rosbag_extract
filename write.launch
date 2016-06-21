@@ -1,13 +1,13 @@
 <!-- this is a launch file -->
 <launch>
 	<arg name='bag'/>
-	<node pkg="rosbag" type="play" name="rosbagplay" args="$(find plot)/data/$(arg bag).bag --clock -d 5 -r 5  " required="true"/>
+	<node pkg="rosbag" type="play" name="rosbagplay" args="$(find rosbag_extract)/data/$(arg bag) --clock -d 5 -r 5  " required="true"/>
 	<node name="utm_odometry_node" pkg="gps_common" type="utm_odometry_node">
 	    <!-- <remap from="/fix" to="/navsat/fix" /> -->
 	    <remap from="/odom" to="/odom1" />
     </node>
     <arg name="file" /> 
-    <node name="animation"  pkg="plot" type="write_topics.py" args="$(arg file)" />
-    <include file="$(find plot)./navsat_transform.launch"/>
+    <node name="write_topics"  pkg="rosbag_extract" type="write_topics.py" args="$(arg file)" />
+    <include file="$(find rosbag_extract)./navsat_transform.launch"/>
 
 </launch>

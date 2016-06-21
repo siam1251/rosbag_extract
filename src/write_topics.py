@@ -282,7 +282,7 @@ def subscribe():
 	rospy.Subscriber("/camera/rgb/image_raw",Image,save_image)
 	
 #parameters
-path = "/home/siam/Dataset-UACampus/"
+path = ""
 imu_theta = 0
 odom_x = 0
 odom_y = 0
@@ -312,6 +312,8 @@ cnt = 1
 if __name__ == '__main__':
 	subscribe()
 	path = path +sys.argv[1] + '/'
+	if not os.path.exists(path):
+		os.makedirs(path)
 	print path
 	gps_odom_file = open(path+gps_odom, 'w')
 	gps_filtered_file = open(path+ gps_filtered, 'w')
