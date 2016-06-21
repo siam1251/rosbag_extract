@@ -10,5 +10,6 @@ roslaunch rosbag_extract write.launch bag:=1.bag file:=/home/ss/1/
 
 file=location where you want to extract your files
 bag=name of the bag file
+create a data folder inside the package
 you should keep your bag files in the data folder of the project
 
